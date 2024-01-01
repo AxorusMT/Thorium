@@ -1,12 +1,17 @@
+#include "Thorium/Core/Core.hpp"
 #include "Thorium/IO/Logger.hpp"
+#include "SDL2/SDL.h"
+#include <SDL2/SDL_log.h>
+
+using namespace Thorium;
 
 int main() {
-    Thorium::IO::Logger logger;
-    logger.trace("hello world trace");
-    logger.debug("hello world debug");
-    logger.info("hello world info");
-    logger.warn("hello world warn");
-    logger.error("hello world error");
-    logger.fatal("hello world fatal");
-    return 0;
+
+    IO::Logger logger;
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        logger.fatal(std::format("Cannot initialise SDL2: {}", SDL_GetError()));
+        return -1;       
+    }
+
+    
 }
